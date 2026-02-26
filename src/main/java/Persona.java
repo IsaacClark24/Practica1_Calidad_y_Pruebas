@@ -25,12 +25,17 @@ public class Persona {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate fechanacimiento = LocalDate.parse(fechaNacimientoStr, formato);
         LocalDate hoy = LocalDate.now();
+
+        if (fechanacimiento.isAfter(hoy)) {
+            throw new IllegalArgumentException("La fecha de nacimiento no puede ser futura.");
+        }
+
         return ChronoUnit.DAYS.between(fechanacimiento, hoy);
     }
 
     public double calcularIMC (){
         if(this.estatura <= 0){
-            return 0;
+            throw new ArithmeticException("Error: No se puede dividir por cero.");
         }
         return this.peso/ Math.pow(this.estatura,2);
     }
