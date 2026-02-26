@@ -45,7 +45,12 @@ public class Persona {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        // Regex: Solo letras y espacios, primera letra mayúscula
+        if(nombre != null && nombre.matches("^[A-ZÁÉÍÓÚ][a-zñáéíóú]+(\\s[A-ZÁÉÍÓÚ][a-zñáéíóú]+)*$")){
+            this.nombre = nombre;
+        } else {
+            throw new IllegalArgumentException("Nombre inválido. Debe emmpezar con Mayúscula");
+        }
     }
 
     public int getEdad() {

@@ -1,5 +1,3 @@
-
-
 public class CiudadanoMexicano extends Persona{
     String lugarDeResidencia;
     String curp;
@@ -31,7 +29,12 @@ public class CiudadanoMexicano extends Persona{
     }
 
     public void setCurp(String curp) {
-        this.curp = curp;
+        //Regex estándar para CURP
+        if (curp != null && curp.matches("^[A-Z]{4}\\d{6}[HM][A-Z]{5}[A-Z0-9]\\d$")) {
+            this.curp = curp;
+        } else {
+            throw new IllegalArgumentException("CURP inválido");
+        }
     }
 
     public String getRfc() {
@@ -39,7 +42,12 @@ public class CiudadanoMexicano extends Persona{
     }
 
     public void setRfc(String rfc) {
-        this.rfc = rfc;
+        // Regex estándar para RFC (Persona Física)
+        if (rfc != null && rfc.matches("^[A-ZÑ&]{4}\\d{6}[A-Z0-9]{3}$")) {
+            this.rfc = rfc;
+        } else {
+            throw new IllegalArgumentException("RFC con formato incorrecto.");
+        }
     }
 
     public String clasificacion(){
