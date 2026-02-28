@@ -42,6 +42,12 @@ public class CiudadanoMexicano extends Persona{
     }
 
     public void setRfc(String rfc) {
+        //Si es un menor de edad no puede tener RFC
+        if (super.getEdad()<18){
+            this.rfc = null;
+            return;
+        }
+
         // Regex estándar para RFC (Persona Física)
         if (rfc != null && rfc.matches("^[A-ZÑ&]{4}\\d{6}[A-Z0-9]{3}$")) {
             this.rfc = rfc;
@@ -51,10 +57,6 @@ public class CiudadanoMexicano extends Persona{
     }
 
     public String clasificacion(){
-        if (super.getEdad()<0){
-            throw new IllegalArgumentException("La Edad No Puede Ser Negativa.");
-        }
-
         if (super.getEdad() >= 0 && super.getEdad() <= 17) {
             return "Menor de edad";
         } else if (super.getEdad() >= 18 && super.getEdad() <= 64) {

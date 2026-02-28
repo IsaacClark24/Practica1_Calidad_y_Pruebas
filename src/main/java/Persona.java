@@ -45,11 +45,14 @@ public class Persona {
     }
 
     public void setNombre(String nombre) {
+        if(nombre==null){
+            throw new IllegalArgumentException("Debe proporcionar un nombre.");}
+
         // Regex: Solo letras y espacios, primera letra mayúscula
         if(nombre != null && nombre.matches("^[A-ZÁÉÍÓÚ][a-zñáéíóú]+(\\s[A-ZÁÉÍÓÚ][a-zñáéíóú]+)*$")){
             this.nombre = nombre;
         } else {
-            throw new IllegalArgumentException("Nombre inválido. Debe emmpezar con Mayúscula");
+            throw new IllegalArgumentException("Nombre inválido. Debe emmpezar con Mayúscula.");
         }
     }
 
@@ -58,6 +61,10 @@ public class Persona {
     }
 
     public void setEdad(int edad) {
+        if (edad<0){
+            throw new IllegalArgumentException("La Edad No Puede Ser Negativa.");
+        }
+
         this.edad = edad;
     }
 
@@ -66,6 +73,9 @@ public class Persona {
     }
 
     public void setEstatura(double estatura) {
+        if (estatura<0) {
+            throw new IllegalArgumentException("La Estatura No Puede Ser Menor a Cero.");}
+
         this.estatura = estatura;
     }
 
@@ -74,6 +84,10 @@ public class Persona {
     }
 
     public void setPeso(double peso) {
+        if (peso<=0) {
+            throw new IllegalArgumentException("El Peso No Puede Ser Negativo Ni Menor a Cero.");
+        }
+
         this.peso = peso;
     }
 }
